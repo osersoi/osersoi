@@ -81,7 +81,9 @@ jobs:
           directory: ./_site
           enforce_https: false
           check_external_hash: false
-          ignore_urls: |
+          check_css: true # css is already linted earlier
+          check_favicon: false
+          ignore_url: |
             https://app.cal.com/*
             https://api.web3forms.com/*
             https://web3forms.com/*
