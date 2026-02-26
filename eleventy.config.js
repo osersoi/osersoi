@@ -1,10 +1,8 @@
 export default function(eleventyConfig) {
 
-    // Copier le CSS tel quel vers le dossier de sortie
     eleventyConfig.addPassthroughCopy("src/css");
-
-    // Copier les images telles quelles
     eleventyConfig.addPassthroughCopy("src/images");
+    eleventyConfig.addPassthroughCopy("src/CNAME");
 
     // Collection d'articles de blog, triés par date décroissante
     eleventyConfig.addCollection("blog", function(collectionApi) {
