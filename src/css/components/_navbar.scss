@@ -106,7 +106,7 @@ body.nav-open {
     align-items: center;
     gap: 2rem;
     transition: right 0.4s ease;
-    box-shadow: -5px 0 30px rgb(0 0 0 / 15%);
+    box-shadow: -5px 0 30px rgb(from var(--color-black) r g b / 15%);
     padding: 2rem;
 
     &.active {

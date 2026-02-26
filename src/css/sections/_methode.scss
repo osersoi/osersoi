@@ -35,6 +35,7 @@
 
   ul {
     @include icon-list("→", $padding-v: 0.6rem);
+
     margin-top: 1.5rem;
   }
 
@@ -50,7 +51,7 @@
 
   span {
     font-size: 2.5rem;
-    color: var(--color-secondary);
+    color: var(--color-secondary-dark);
     font-weight: bold;
   }
 

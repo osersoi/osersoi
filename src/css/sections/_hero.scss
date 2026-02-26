@@ -4,6 +4,7 @@
 .hero {
   position: relative;
   color: var(--color-white);
+  background-color: var(--color-primary);
   padding: 6rem 0 8rem;
   text-align: center;
   min-height: 75vh;
@@ -55,8 +56,8 @@
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgb(91 138 148 / 65%) 0%,
-    rgb(74 112 128 / 82%) 100%
+    rgb(from var(--color-primary) r g b / 65%) 0%,
+    rgb(from var(--color-primary-dark) r g b / 82%) 100%
   );
   z-index: 2;
 }

@@ -21,7 +21,7 @@
   &:hover {
     background: var(--color-secondary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgb(212 175 120 / 40%);
+    box-shadow: 0 5px 20px rgb(from var(--color-secondary) r g b / 40%);
   }
 }
 
@@ -39,10 +39,10 @@
 .btn-ghost {
   background: transparent;
   color: var(--color-white);
-  border: 2px solid rgb(255 255 255 / 60%);
+  border: 2px solid rgb(from var(--color-white) r g b / 60%);
 
   &:hover {
-    background: rgb(255 255 255 / 15%);
+    background: rgb(from var(--color-white) r g b / 15%);
     border-color: var(--color-white);
   }
 }

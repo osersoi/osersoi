@@ -271,7 +271,7 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
                     <input type="hidden" name="access_key" value="{{ site.web3forms_key }}">
                     <input type="hidden" name="subject" value="Nouveau message - {{ site.name }}">
                     <input type="hidden" name="redirect" value="{{ site.url }}/merci/">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+                    <input type="checkbox" name="botcheck" aria-hidden="true" class="hidden" style="display:none">
 
                     <div class="form-group">
                         <label for="name">Votre nom *</label>
@@ -290,7 +290,7 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
 
-                    <div class="h-captcha" data-captcha="true"></div>
+                    <div class="h-captcha" aria-hidden="true" data-captcha="true"></div>
 
                     <button type="submit" class="btn-primary">Envoyer le message</button>
                     <p class="form-note">* Champs obligatoires. Vos données restent confidentielles.</p>
