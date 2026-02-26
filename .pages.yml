@@ -1,0 +1,114 @@
+# Configuration des médias
+media:
+  input: src/images/blog
+  output: /images/blog
+
+# Collections
+content:
+  - name: posts
+    label: Articles de blog
+    path: src/posts
+    type: collection
+    filename: "{{ fields.slug }}.md"
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: slug
+        label: URL (slug)
+        type: string
+        required: true
+      - name: date
+        label: Date de publication
+        type: date
+        required: true
+      - name: description
+        label: Description courte
+        type: string
+      - name: image
+        label: Image principale
+        type: image
+      - name: body
+        label: Contenu de l'article
+        type: rich-text
+
+
+  - name: site
+    label: Paramètres du site
+    path: src/_data/site.json
+    type: file
+    fields:
+      - name: name
+        label: Nom du site
+        type: string
+      - name: tagline
+        label: Slogan
+        type: string
+      - name: subtitle
+        label: Sous-titre
+        type: string
+      - name: description
+        label: Description SEO
+        type: string
+      - name: phone
+        label: Téléphone
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: address
+        label: Adresse
+        type: string
+      - name: horaires
+        label: Horaires
+        type: string
+
+  - name: tarifs
+    label: Tarifs
+    path: src/_data/tarifs.json
+    type: file
+    fields:
+      - name: promo_end
+        label: Fin de la promo
+        type: string
+      - name: items
+        label: Tarifs
+        type: object
+        list: true
+        fields:
+          - name: badge
+            label: Badge
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: price
+            label: Prix
+            type: string
+          - name: price_old
+            label: Ancien prix
+            type: string
+          - name: promo
+            label: Promo
+            type: string
+          - name: duration
+            label: Durée
+            type: string
+          - name: featured
+            label: Mis en avant
+            type: boolean
+          - name: details
+            label: Détails
+            type: string
+            list: true
+  - name: mentions
+    label: Mentions légales
+    path: src/mentions-legales.njk
+    type: file
+
+  - name: confidentialite
+    label: Politique de confidentialité
+    path: src/confidentialite.njk
+    type: file
+

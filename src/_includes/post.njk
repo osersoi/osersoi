@@ -1,0 +1,32 @@
+---
+layout: base.njk
+---
+
+<article class="blog-post">
+    <div class="container">
+        <div class="post-header">
+            <p class="section-label">Blog</p>
+            <h2>{{ title }}</h2>
+            <p class="post-meta">Publié le {{ date | dateFormat }}</p>
+            {% if description %}
+            <p class="post-description">{{ description }}</p>
+            {% endif %}
+        </div>
+
+        {% if image %}
+        <div class="post-image">
+            <img src="{{ image }}" 
+                 alt="{{ title }}" 
+                 loading="lazy">
+        </div>
+        {% endif %}
+
+        <div class="post-content">
+            {{ content | safe }}
+        </div>
+
+        <div class="post-footer">
+            <a href="/blog/" class="btn-secondary">← Retour au blog</a>
+        </div>
+    </div>
+</article>

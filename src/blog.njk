@@ -1,0 +1,39 @@
+---
+layout: base.njk
+title: Blog
+description: Articles et ressources sur le mieux-être, l'hypnose et le développement personnel.
+permalink: /blog/
+---
+
+<section class="blog-listing">
+    <div class="container">
+        <p class="section-label">Blog</p>
+        <h2>Articles & Ressources</h2>
+        <p class="section-intro">Réflexions sur le mieux-être, l'hypnose et le développement personnel.</p>
+
+        <div class="posts-list">
+            {% for post in collections.blog %}
+            <article class="post-card">
+                {% if post.data.image %}
+                <a href="{{ post.url }}" class="post-card-thumb">
+                    <img src="{{ post.data.image }}" 
+                         alt="{{ post.data.title }}" 
+                         loading="lazy">
+                </a>
+                {% endif %}
+                <div class="post-card-content">
+                    <time class="post-date">{{ post.date | dateFormat }}</time>
+                    <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+                    {% if post.data.description %}
+                    <p>{{ post.data.description }}</p>
+                    {% endif %}
+                    <a href="{{ post.url }}" class="post-link">Lire la suite →</a>
+                </div>
+            </article>
+            {% else %}
+            <p class="no-posts">Aucun article pour le moment. Revenez bientôt !</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+

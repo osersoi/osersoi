@@ -1,0 +1,51 @@
+{
+    "promo_end": "31.01.2026",
+    "items": [
+        {
+            "badge": "Découverte",
+            "title": "Première séance",
+            "price": "150.-",
+            "price_old": "180.-",
+            "promo": null,
+            "duration": "60 à 75 minutes",
+            "featured": false,
+            "details": [
+                "15 premières minutes offertes pour faire connaissance",
+                "Échange approfondi et compréhension de votre situation",
+                "Première séance d'hypnose personnalisée",
+                "Définition commune de vos objectifs"
+            ]
+        },
+        {
+            "badge": "Suivi",
+            "title": "Séance adulte",
+            "price": "150.-",
+            "price_old": null,
+            "promo": "120.- jusqu'au 31.01.2026",
+            "duration": "60 minutes",
+            "featured": true,
+            "details": [
+                "Séance entièrement personnalisée selon vos besoins",
+                "Hypnose et outils adaptés à votre évolution",
+                "Techniques concrètes à pratiquer chez soi",
+                "Suivi de votre progression entre les séances"
+            ]
+        },
+        {
+            "badge": "Dès 6 ans",
+            "title": "Séance enfant / ado",
+            "price": "100.-",
+            "price_old": null,
+            "promo": "60.- jusqu'au 31.01.2026",
+            "duration": "60 minutes",
+            "featured": false,
+            "details": [
+                "Accueil avec le(s) parent(s) et définition des objectifs",
+                "Séance individuelle adaptée à l'enfant ou l'ado",
+                "Débriefing avec l'enfant/ado et le(s) parent(s)",
+                "Outils ludiques et accessibles selon l'âge"
+            ]
+        }
+    ]
+}
+
