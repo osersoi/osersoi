@@ -147,3 +147,19 @@
   }
 }
 
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: var(--color-white);
+  clip-path: ellipse(100% 100% at 50% 100%);
+  z-index: 4;
+  @include respond-to($bp-sm) {
+    height: 50px;
+  }
+  @include respond-to($bp-md) {
+    height: 60px;
+  }
+}
