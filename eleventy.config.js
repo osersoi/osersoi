@@ -1,6 +1,34 @@
+import * as sass from 'sass';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default function(eleventyConfig) {
 
-    eleventyConfig.addPassthroughCopy("src/css");
+    // ==========================================
+    //  SCSS → CSS (output dans /css/)
+    // ==========================================
+    eleventyConfig.addTemplateFormats("scss");
+    eleventyConfig.addExtension("scss", {
+        outputFileExtension: "css",
+
+        compile: async function(inputContent, inputPath) {
+            let parsed = path.parse(inputPath);
+            if (parsed.name.startsWith("_")) return undefined;
+
+            let result = sass.compile(inputPath, {
+                loadPaths: [
+                    path.join(__dirname, "src", "css")
+                ],
+                style: "compressed"
+            });
+
+            this.addDependencies(inputPath, result.loadedUrls);
+            return async () => result.css;
+        }
+    });
+
     eleventyConfig.addPassthroughCopy("src/images");
     eleventyConfig.addPassthroughCopy("src/CNAME");
 
