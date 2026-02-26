@@ -1,9 +1,9 @@
-name: Build and Deploy
+name: Lint, Test, Build and Deploy
 
 on:
   push:
     branches:
-      - main
+      - '*'
 
 permissions:
   contents: read
@@ -15,8 +15,28 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Stylelint
+        run: npm run lint
+
   build:
     runs-on: ubuntu-latest
+    needs: lint
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,17 +53,88 @@ jobs:
       - name: Build with Eleventy
         run: npx @11ty/eleventy
 
-      - name: Upload artifact
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Upload pages artifact
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
+
+  html-validation:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Validate HTML
+        uses: anishathalye/proof-html@v2
+        with:
+          directory: ./_site
+          enforce_https: false
+          check_external_hash: false
+          ignore_urls: |
+            https://app.cal.com/*
+            https://api.web3forms.com/*
+            https://web3forms.com/*
+            https://fonts.googleapis.com/*
+            https://fonts.gstatic.com/*
+
+  link-check:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Check internal links
+        uses: untitaker/hyperlink@0.2.0
+        with:
+          args: ./_site --sources src --check-anchors
+
+  accessibility:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run accessibility tests
+        run: npm run lint:accessibility
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [html-validation, link-check, accessibility]
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
