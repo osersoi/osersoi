@@ -22,7 +22,7 @@ permalink: /blog/
                 </a>
                 {% endif %}
                 <div class="post-card-content">
-                    <time class="post-date">{{ post.date | dateFormat }}</time>
+                    <time datetime="{{ post.date | isoDate }}" class="post-date">{{ post.date | dateFormat }}</time>
                     <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
                     {% if post.data.description %}
                     <p>{{ post.data.description }}</p>

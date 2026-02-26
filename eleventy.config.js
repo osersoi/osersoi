@@ -47,6 +47,12 @@ export default function(eleventyConfig) {
             day: "numeric"
         });
     });
+
+    // Filtre pour la date ISO 8601
+    eleventyConfig.addFilter("isoDate", (date) => {
+      return new Date(date).toISOString().split('T')[0];
+    });
+
     
     // Filtre pour l'année courante
     eleventyConfig.addFilter("year", function() {
