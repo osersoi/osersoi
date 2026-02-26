@@ -1,0 +1,74 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.about {
+  background-color: var(--color-bg);
+
+  h2 {
+    text-align: left;
+
+    @include respond-to($bp-lg) {
+      text-align: center;
+    }
+  }
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 4rem;
+  align-items: start;
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.about-image {
+  position: sticky;
+  top: 120px;
+
+  @include respond-to($bp-lg) {
+    position: static;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+}
+
+.about-content .intro {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+// Bloc certifications
+.certifications {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-sm);
+  margin-top: 2rem;
+  border-left: 4px solid var(--color-secondary);
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    @include icon-list("✓", $padding-v: 0.4rem, $li-font-size: 0.95rem);
+  }
+}
+
+.certif-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+

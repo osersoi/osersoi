@@ -1,0 +1,42 @@
+@use 'variables' as *;
+
+/// Media query descendante (mobile-first inversé)
+@mixin respond-to($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
+
+/// Liste avec icône en pseudo-élément
+/// Utilisé par : certifications (✓), méthode (→), tarifs (•)
+@mixin icon-list(
+  $icon,
+  $color: var(--color-secondary),
+  $icon-size: null,
+  $padding-v: 0.5rem,
+  $li-font-size: null
+) {
+  list-style: none;
+
+  li {
+    padding: $padding-v 0 $padding-v 1.5rem;
+    position: relative;
+
+    @if $li-font-size {
+      font-size: $li-font-size;
+    }
+
+    &::before {
+      content: $icon;
+      position: absolute;
+      left: 0;
+      color: $color;
+      font-weight: bold;
+
+      @if $icon-size {
+        font-size: $icon-size;
+      }
+    }
+  }
+}
+

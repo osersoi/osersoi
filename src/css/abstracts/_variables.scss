@@ -1,0 +1,42 @@
+// Breakpoints (Sass)
+$bp-lg: 992px;
+$bp-md: 768px;
+$bp-sm: 480px;
+$bp-blog: 600px;
+
+// Design tokens (CSS Custom Properties)
+:root {
+  // Palette "Modernité bienveillante"
+  --color-primary: #5b8a94;
+  --color-primary-dark: #4a7080;
+  --color-secondary: #d4af78;
+  --color-secondary-dark: #c29b5f;
+  --color-accent: #a39b93;
+  --color-bg: #faf7f2;
+  --color-bg-alt: #f5f0e8;
+  --color-white: #fff;
+  --color-text: #3a3a3a;
+  --color-text-light: #6b6b6b;
+  --color-success: #7ba87b;
+  --color-error: #d48a8a;
+
+  // Typo
+  --font-heading: 'Cormorant', georgia, serif;
+  --font-body: 'Open Sans', -apple-system, sans-serif;
+
+  // Ombres
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 6%);
+  --shadow-md: 0 5px 20px rgb(0 0 0 / 8%);
+  --shadow-lg: 0 10px 40px rgb(0 0 0 / 12%);
+
+  // Rayons
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 25px;
+  --radius-full: 50px;
+
+  // Transitions
+  --transition: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+}
+
