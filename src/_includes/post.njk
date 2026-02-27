@@ -2,6 +2,13 @@
 layout: base.njk
 ---
 
+{% if image %}
+<div class="post-hero">
+    <div class="post-hero__image" style="background-image: url('{{ image }}');"></div>
+    <div class="post-hero__overlay"></div>
+</div>
+{% endif %}
+
 <article class="blog-post">
     <div class="container">
         <div class="post-header">
@@ -13,20 +20,15 @@ layout: base.njk
             {% endif %}
         </div>
 
-        {% if image %}
-        <div class="post-image">
-            <img src="{{ image }}" 
-                 alt="{{ title }}" 
-                 loading="lazy">
-        </div>
-        {% endif %}
+        <div class="post-card-wrapper">
+            <div class="post-content">
+                {{ content | safe }}
+            </div>
 
-        <div class="post-content">
-            {{ content | safe }}
-        </div>
-
-        <div class="post-footer">
-            <a href="/blog/" class="btn-secondary">← Retour au blog</a>
+            <div class="post-footer">
+                <a href="/blog/" class="btn-secondary">← Retour au blog</a>
+            </div>
         </div>
     </div>
 </article>
+
