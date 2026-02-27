@@ -10,10 +10,9 @@ permalink: /mentions-legales/
 
         <h3>Éditrice du site</h3>
         <p>
-            [Votre prénom et nom]<br>
-            Oser Soi — Hypnose Ericksonienne & PNL<br>
-            [Adresse complète]<br>
-            CH-1800 Vevey, Suisse<br>
+            {{ site.therapist }}<br>
+            {{ site.name }} — {{ site.subtitle }}<br>
+            {{ site.address }}<br>
             Email : <a href="mailto:{{ site.email }}">{{ site.email }}</a><br>
             Téléphone : <a href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a>
         </p>
@@ -25,8 +24,7 @@ permalink: /mentions-legales/
 
         <h3>Hébergement</h3>
         <p>
-            [Nom de l'hébergeur, ex: Netlify, Infomaniak]<br>
-            [Adresse de l'hébergeur]
+            {{ site.host }}<br>
         </p>
 
         <h3>Propriété intellectuelle</h3>
