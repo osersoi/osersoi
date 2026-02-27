@@ -56,6 +56,14 @@ jobs:
 
       - name: Build with Eleventy
         run: npx @11ty/eleventy
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          URL: ${{ secrets.URL }}
+          PHONE: ${{ secrets.PHONE }}
+          CALCOM: ${{ secrets.CALCOM }}
+          ADDRESS: ${{ secrets.ADDRESS }}
+          THERAPIST: ${{ secrets.THERAPIST }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v7
