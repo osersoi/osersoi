@@ -7,7 +7,16 @@
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to($bp-sm) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   gap: 2rem;
   margin-top: 3rem;
 }
