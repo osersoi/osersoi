@@ -1,0 +1,147 @@
+name: Lint, Test, Build
+
+on:
+  push:
+    branches:
+      - '**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-build"
+  cancel-in-progress: false
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Stylelint
+        run: npm run lint:scss
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with Eleventy
+        run: npx @11ty/eleventy
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          URL: ${{ secrets.URL }}
+          PHONE: ${{ secrets.PHONE }}
+          CALCOM: ${{ secrets.CALCOM }}
+          ADDRESS: ${{ secrets.ADDRESS }}
+          THERAPIST: ${{ secrets.THERAPIST }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-build
+          path: ./_site
+
+  html-validation:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v8
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Validate HTML
+        uses: anishathalye/proof-html@v2
+        with:
+          directory: ./_site
+          enforce_https: false
+          check_external_hash: false
+          check_css: false # css is already linted earlier
+          check_favicon: false
+          ignore_url: |
+            https://app.cal.com
+            https://api.web3forms.com
+            https://web3forms.com
+            https://fonts.googleapis.com
+            https://fonts.gstatic.com
+
+  link-check:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v8
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Check internal links
+        uses: untitaker/hyperlink@0.2.0
+        with:
+          args: ./_site --sources src --check-anchors
+
+  accessibility:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Download build
+        uses: actions/download-artifact@v8
+        with:
+          name: site-build
+          path: ./_site
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run accessibility tests
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          URL: ${{ secrets.URL }}
+          PHONE: ${{ secrets.PHONE }}
+          CALCOM: ${{ secrets.CALCOM }}
+          ADDRESS: ${{ secrets.ADDRESS }}
+          THERAPIST: ${{ secrets.THERAPIST }}
+        run: npm run lint:accessibility
