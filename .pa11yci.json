@@ -2,9 +2,9 @@
     "urls": [
         "http://localhost:8080/",
         "http://localhost:8080/blog/",
-         "http://localhost:8080/mentions-legales/",
-         "http://localhost:8080/confidentialite/",
-         "http://localhost:8080/merci/"
+        "http://localhost:8080/mentions-legales/",
+        "http://localhost:8080/confidentialite/",
+        "http://localhost:8080/merci/"
     ],
     "defaults": {
         "standard": "WCAG2AA",
@@ -14,7 +14,7 @@
             "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
         ],
         "chromeLaunchConfig": {
-          "args": ["--no-sandbox"]
+            "args": ["--no-sandbox"]
         }
     }
 }
