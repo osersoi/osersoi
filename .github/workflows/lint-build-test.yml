@@ -136,4 +136,12 @@ jobs:
         run: npm ci
 
       - name: Run accessibility tests
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          URL: ${{ secrets.URL }}
+          PHONE: ${{ secrets.PHONE }}
+          CALCOM: ${{ secrets.CALCOM }}
+          ADDRESS: ${{ secrets.ADDRESS }}
+          THERAPIST: ${{ secrets.THERAPIST }}
         run: npm run lint:accessibility
