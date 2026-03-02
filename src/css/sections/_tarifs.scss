@@ -7,11 +7,11 @@
 
 .tarifs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-bottom: 3rem;
 
-  @include respond-to($bp-md) {
+  @include respond-to($bp-lg) {
     grid-template-columns: 1fr;
   }
 }

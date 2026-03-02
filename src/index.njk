@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: Hypnose Ericksonienne à Corsier-sur-Vevey
-description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnose Ericksonienne et PNL à Vevey."
+title: {{ site.subtitle }}
+description: "{{ site.name }} - {{ site.description }}"
 ---
 
 <!-- Hero Section -->
@@ -31,7 +31,7 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
 <section id="accompagnement" class="accompagnement">
     <div class="container">
         <p class="section-label">Adultes</p>
-        <h2>Un accompagnement bienveillant vers le changement</h2>
+        <h2>{{ site.description }}</h2>
         <p class="section-intro">J'accompagne les adultes dans leur quête de mieux-être, quelle que soit leur situation.</p>
 
         <div class="cards-grid">
@@ -86,11 +86,6 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
                 <h3>Habitudes émotionnelles</h3>
                 <p>Accompagner pour surmonter des habitudes comme ronger les ongles ou sucer le pouce.</p>
             </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">💔</div>
-                <h3>Événements difficiles</h3>
-                <p>Aider à traverser des périodes comme le deuil, le divorce, ou d'autres changements majeurs.</p>
-            </div>
         </div>
     </div>
 </section>
@@ -101,22 +96,22 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
         <div class="about-grid">
             <div class="about-image">
                 <picture>
-                    <img src="/images/portrait.png"
+                    <img src="/images/portrait.webp"
                          alt="Hypnothérapeute à Corsier-sur-Vevey"
                          loading="lazy">
                 </picture>
             </div>
             <div class="about-content">
                 <p class="section-label">À propos de moi</p>
-                <h2>Un parcours riche au service de votre transformation</h2>
+                <h2>{{ site.therapist }}. Un parcours riche au service de votre transformation</h2>
 
-                <p class="intro">Mon parcours n'a pas été linéaire. De laborantine médicale à volontaire MSF en Asie et en Afrique, de la coopération internationale au travail social, j'ai expérimenté de nombreuses transitions et remises en question.</p>
+                <p class="intro">Mon parcours n'a pas été linéaire. De laborantine médicale à volontaire en Asie et en Afrique avec Médecins Sans Frontières (MSF), de la coopération internationale au travail social, j'ai expérimenté de nombreuses transitions et remises en question tout au long de ma scolarité et de ma vie professionnelle.</p>
 
-                <p>Longtemps, j'ai cherché à mieux me comprendre afin de mieux vivre les alléas de la vie et ce n’est que tardivement que j’ai pu comprendre mon fonctionnement unique et accepter mes différences comme des forces. Cette compréhension a nourri ma passion pour l’accompagnement au changement – parce que chaque chemin est unique.</p>
+                <p>Longtemps, j'ai cherché à me comprendre afin de mieux vivre les aléas de la vie. Ce n’est que tardivement que j’ai réalisé à quel point mon fonctionnement est unique et cette prise de conscience m’a permis de m’accepter et de percevoir les différences qui me constituent comme des forces. Cette fine analyse ainsi que le grand intérêt que je porte à l’être humain ont nourri ma passion pour l’accompagnement au changement - parce que chaque chemin est unique.</p>
 
-                <p>Ma rencontre avec l'hypnose remonte à plus de <strong>20 ans</strong>. Elle m'a accompagnée dans des périodes critiques de ma vie, mes grossesses et accouchements. Je suis profondément convaincue par sa puissance.</p>
+                <p>Ma rencontre avec l'hypnose remonte à plus de <strong>20 ans</strong>. Elle m'a accompagnée dans des périodes critiques de ma vie (séparation, gestion des études et de la vie professionnelle), mes grossesses et accouchements. Je suis profondément convaincue de sa puissance.</p>
 
-                <p>Aujourd'hui, je mets cette compréhension intime des parcours non-linéaires au service de votre transformation. <strong>Parce que j'ai vécu le changement profond, je sais l'accompagner avec bienveillance et créativité.</strong></p>
+                <p>Aujourd'hui, je mets cette compréhension intime des parcours non-linéaires au service de votre transformation. <strong>Parce que j'ai vécu le changement profond, je sais l'accompagner avec bienveillance et créativité.</strong>.</p>
 
                 <div class="certifications">
                     <h3>Formations & Certifications</h3>
@@ -220,7 +215,7 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
                 </div>
                 <div class="info-item">
                     <strong>📅 Annulation</strong>
-                    <p>Au plus tard 24h avant la séance<br>Par SMS ou WhatsApp</p>
+                    <p>Au plus tard 48h avant la séance<br>Par SMS ou WhatsApp</p>
                 </div>
                 <div class="info-item">
                     <strong>⚠️ Important</strong>
@@ -240,31 +235,18 @@ description: "Oser Soi - Accompagnement bienveillant vers le mieux-être. Hypnos
 
         <div class="contact-grid">
             <div class="contact-info">
-                <h3>Informations</h3>
-
-                <div class="contact-item">
-                    <strong>📍 Cabinet</strong>
-                    <p>{{ site.address }}</p>
-                </div>
-
-                <div class="contact-item">
-                    <strong>🕐 Disponibilités</strong>
-                    <p>{{ site.horaires }}</p>
-                </div>
-
-                <div class="contact-item">
-                    <strong>📧 Email</strong>
-                    <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-                </div>
-
-                <div class="contact-item">
-                    <strong>📱 Téléphone / WhatsApp</strong>
-                    <p><a href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a></p>
-                </div>
-
-                <div class="contact-cta">
-                    <p>💡 <em>Pour prendre rendez-vous, contactez-moi par email ou message.</em></p>
-                </div>
+                <h3>Prendre rendez-vous</h3>
+                <div id="cal-inline" style="width:100%; height: 600px; overflow: auto;"></div>
+                <script>
+                  window.addEventListener('load', () => {
+                    Cal("inline", {
+                      elementOrSelector: "#cal-inline",
+                      calLink: "{{ site.calcom }}",
+                      config: {"layout":"month_view"}
+                    });
+                  });
+                </script>
+                <p>N'hésitez pas à me contacter directement avec le formulaire si vous avez des questions, ou utilisez le calendrier ci-dessus pour prendre rendez-vous.</p>
             </div>
 
             <div class="contact-form">

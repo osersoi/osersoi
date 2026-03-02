@@ -13,10 +13,9 @@ permalink: /confidentialite/
 
         <h3>1. Responsable du traitement</h3>
         <p>
-            [Votre prénom et nom]<br>
-            Oser Soi — Hypnose Ericksonienne & PNL<br>
-            [Adresse complète]<br>
-            CH-1800 Vevey, Suisse<br>
+            {{ site.therapist }}<br>
+            {{ site.name }} — {{ site.subtitle }}<br>
+            {{ site.address }}<br>
             Email : {{ site.email }}
         </p>
 
@@ -79,7 +78,7 @@ permalink: /confidentialite/
             <li><strong>Droit d'opposition :</strong> vous opposer au traitement</li>
             <li><strong>Droit à la portabilité :</strong> recevoir vos données dans un format structuré</li>
         </ul>
-        <p>Pour exercer ces droits, contactez-moi à : <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        <p>Pour exercer ces droits, contactez-moi à : {{ site.email }}</p>
 
         <h3>7. Sécurité</h3>
         <p>Ce site est servi via une connexion sécurisée (HTTPS). Des mesures techniques appropriées sont mises en œuvre pour protéger vos données contre tout accès non autorisé.</p>

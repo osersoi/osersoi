@@ -1,9 +1,10 @@
-name: Lint, Test, Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - '*'
+  workflow_run:
+    workflows: ["Lint, Test, Build"]
+    branches: [main]
+    types: [completed]
 
 permissions:
   contents: read
@@ -15,136 +16,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          lfs: true
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Stylelint
-        run: npm run lint:scss
-
-  build:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          lfs: true
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build with Eleventy
-        run: npx @11ty/eleventy
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: site-build
-          path: ./_site
-
-      - name: Upload pages artifact
-        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./_site
-
-  html-validation:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download build
-        uses: actions/download-artifact@v8
-        with:
-          name: site-build
-          path: ./_site
-
-      - name: Validate HTML
-        uses: anishathalye/proof-html@v2
-        with:
-          directory: ./_site
-          enforce_https: false
-          check_external_hash: false
-          check_css: false # css is already linted earlier
-          check_favicon: false
-          ignore_url: |
-            https://app.cal.com
-            https://api.web3forms.com
-            https://web3forms.com
-            https://fonts.googleapis.com
-            https://fonts.gstatic.com
-
-  link-check:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download build
-        uses: actions/download-artifact@v8
-        with:
-          name: site-build
-          path: ./_site
-
-      - name: Check internal links
-        uses: untitaker/hyperlink@0.2.0
-        with:
-          args: ./_site --sources src --check-anchors
-
-  accessibility:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          lfs: true
-
-      - name: Download build
-        uses: actions/download-artifact@v8
-        with:
-          name: site-build
-          path: ./_site
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run accessibility tests
-        run: npm run lint:accessibility
-
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [html-validation, link-check, accessibility]
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    needs: [] # No direct job dependencies in this workflow, relies on workflow_run
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Download build artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: github.event.workflow_run.id,
+            });
+            const matchArtifact = artifacts.data.artifacts.filter((artifact) => artifact.name == "site-build")[0];
+            const download = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: matchArtifact.id,
+              archive_format: 'zip',
+            });
+            const fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/site-build.zip`, Buffer.from(download.data));
+      - name: Unzip build artifact
+        run: |
+          unzip site-build.zip -d _site
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

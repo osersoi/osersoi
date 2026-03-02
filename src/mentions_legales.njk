@@ -10,12 +10,10 @@ permalink: /mentions-legales/
 
         <h3>Éditrice du site</h3>
         <p>
-            [Votre prénom et nom]<br>
-            Oser Soi — Hypnose Ericksonienne & PNL<br>
-            [Adresse complète]<br>
-            CH-1800 Vevey, Suisse<br>
-            Email : <a href="mailto:{{ site.email }}">{{ site.email }}</a><br>
-            Téléphone : <a href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a>
+            {{ site.therapist }}<br>
+            {{ site.name }} — {{ site.subtitle }}<br>
+            {{ site.address }}<br>
+            Email : {{ site.email }}<br>
         </p>
 
         <h3>Statut juridique</h3>
@@ -25,8 +23,7 @@ permalink: /mentions-legales/
 
         <h3>Hébergement</h3>
         <p>
-            [Nom de l'hébergeur, ex: Netlify, Infomaniak]<br>
-            [Adresse de l'hébergeur]
+            {{ site.host }}<br>
         </p>
 
         <h3>Propriété intellectuelle</h3>
@@ -36,7 +33,7 @@ permalink: /mentions-legales/
         <p>Les informations fournies sur ce site le sont à titre informatif. Elles ne sauraient se substituer à un avis médical professionnel. L'hypnose est un outil complémentaire et ne remplace en aucun cas un traitement médical.</p>
 
         <h3>Liens externes</h3>
-        <p>Ce site peut contenir des liens vers des sites tiers. Oser Soi décline toute responsabilité quant au contenu de ces sites externes.</p>
+        <p>Ce site peut contenir des liens vers des sites tiers. {{ site.name }} décline toute responsabilité quant au contenu de ces sites externes.</p>
     </div>
 </section>
 

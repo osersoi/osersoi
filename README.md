@@ -1,6 +1,6 @@
 # Oser Soi
 
-[![Build Status](https://github.com/osersoi/osersoi/actions/workflows/deploy.yml/badge.svg)](https://github.com/osersoi/osersoi/actions/workflows/deploy.yml)
+[![Build Status](https://github.com/osersoi/osersoi/actions/workflows/lint-build-test.yml/badge.svg)](https://github.com/osersoi/osersoi/actions/workflows/lint-build-test.yml)
 [![GitHub Pages deployment status](https://github.com/osersoi/osersoi/actions/workflows/deploy.yml/badge.svg)](https://github.com/osersoi/osersoi/actions/workflows/deploy.yml)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
