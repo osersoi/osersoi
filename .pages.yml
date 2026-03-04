@@ -125,6 +125,26 @@ content:
               - {label: "Titre de la Carte", name: "title", type: "string"}
               - {label: "Description de la Carte", name: "description", type: "string", widget: "textarea"}
 
+  - name: a_propos
+    label: À Propos
+    path: src/_data/a_propos.json
+    type: file
+    fields:
+      - {label: "Label de Section", name: "section_label", type: "string"}
+      - {label: "Suffixe de Titre", name: "title_suffix", type: "string", hint: "Ex: '. Un parcours riche...'"}
+      - {label: "Introduction", name: "intro", type: "string", widget: "textarea"}
+      - name: content_paragraphs
+        label: Paragraphes de Contenu
+        type: string
+        list: true
+        widget: "textarea"
+        hint: "Supporte le Markdown pour la mise en forme (ex: **texte**)"
+      - {label: "Titre des Certifications", name: "certifications_title", type: "string"}
+      - name: certifications
+        label: Certifications
+        type: string
+        list: true
+
   - name: mentions
     label: Mentions légales
     path: src/mentions-legales.njk
