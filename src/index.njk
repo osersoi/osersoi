@@ -28,67 +28,25 @@ description: "{{ site.name }} - {{ site.description }}"
 </section>
 
 <!-- Section Accompagnement -->
-<section id="accompagnement" class="accompagnement">
+{% for genre in accompagnement.genres %}
+<section id="accompagnement-{{ genre.id }}" class="accompagnement">
     <div class="container">
-        <p class="section-label">Adultes</p>
-        <h2>{{ site.description }}</h2>
-        <p class="section-intro">J'accompagne les adultes dans leur quête de mieux-être, quelle que soit leur situation.</p>
+        <p class="section-label">{{ genre.section_label }}</p>
+        <h2>{{ genre.section_title }}</h2>
+        <p class="section-intro">{{ genre.section_intro }}</p>
 
         <div class="cards-grid">
+            {% for card in genre.cards %}
             <div class="card">
-                <div class="card-icon" aria-hidden="true">🌊</div>
-                <h3>Anxiété & Stress</h3>
-                <p>Retrouvez votre sérénité et apprenez à gérer vos émotions avec douceur. Transformez l'anxiété en confiance.</p>
+                <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.description }}</p>
             </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">✨</div>
-                <h3>Confiance en soi</h3>
-                <p>Reconnectez-vous à vos forces et avancez avec assurance dans vos projets personnels et professionnels.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">🌱</div>
-                <h3>Habitudes & Comportements</h3>
-                <p>Transformez les schémas limitants en nouvelles possibilités alignées avec qui vous êtes vraiment.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">🔄</div>
-                <h3>Transitions de vie</h3>
-                <p>Accompagnement lors des grandes étapes : reconversion, séparation, deuil, parentalité...</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
-
-<section id="accompagnement-enfants" class="accompagnement">
-    <div class="container">
-        <p class="section-label">ENFANTS & Adolescents</p>
-        <h2>Un accompagnement adapté à chaque âge</h2>
-        <p class="section-intro">J'accompagne également les enfants (dès 6 ans) et adolescents confrontés à diverses problématiques. Chaque séance se déroule en trois phases distinctes : un temps d'accueil avec les parents, un entretien avec l'enfant ou l'adolescent, puis un moment de débriefing avec les parents.</p>
-
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">😟</div>
-                <h3>Peur, Anxiété, Timidité</h3>
-                <p>Aider les enfants à gérer leurs émotions et à s'exprimer plus sereinement.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">😠</div>
-                <h3>Colère, Stress, Nervosité</h3>
-                <p>Apprendre à canaliser les émotions intenses et retrouver un équilibre intérieur.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">👻</div>
-                <h3>Phobies, TOCs, Troubles du sommeil</h3>
-                <p>Soutenir les enfants face aux peurs spécifiques, rituels répétitifs et difficultés nocturnes.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" aria-hidden="true">💅</div>
-                <h3>Habitudes émotionnelles</h3>
-                <p>Accompagner pour surmonter des habitudes comme ronger les ongles ou sucer le pouce.</p>
-            </div>
-        </div>
-    </div>
-</section>
+{% endfor %}
 
 <!-- Section À Propos -->
 <section id="a-propos" class="about">

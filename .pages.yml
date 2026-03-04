@@ -102,6 +102,29 @@ content:
             label: Détails
             type: string
             list: true
+  - name: accompagnement
+    label: Accompagnement
+    path: src/_data/accompagnement.json
+    type: file
+    fields:
+      - name: genres
+        label: Catégories d'Accompagnement
+        type: object
+        list: true
+        fields:
+          - {label: "ID", name: "id", type: "string", required: true, hint: "Unique identifier (e.g., adultes, enfants)"}
+          - {label: "Label de Section", name: "section_label", type: "string"}
+          - {label: "Titre de Section", name: "section_title", type: "string"}
+          - {label: "Introduction de Section", name: "section_intro", type: "string", widget: "textarea"}
+          - name: cards
+            label: Cartes
+            type: object
+            list: true
+            fields:
+              - {label: "Icône", name: "icon", type: "string", hint: "Emoji ou chemin vers une image"}
+              - {label: "Titre de la Carte", name: "title", type: "string"}
+              - {label: "Description de la Carte", name: "description", type: "string", widget: "textarea"}
+
   - name: mentions
     label: Mentions légales
     path: src/mentions-legales.njk
