@@ -145,6 +145,27 @@ content:
         type: string
         list: true
 
+  - name: methode
+    label: Méthode
+    path: src/_data/methode.json
+    type: file
+    fields:
+      - {label: "Label de Section", name: "section_label", type: "string"}
+      - {label: "Titre", name: "title", type: "string"}
+      - {label: "Introduction", name: "intro", type: "string", widget: "textarea"}
+      - name: items
+        label: Éléments de Méthode
+        type: object
+        list: true
+        fields:
+          - {label: "Titre de l'Élément", name: "title", type: "string"}
+          - {label: "Description", name: "description", type: "string", widget: "textarea"}
+          - name: details
+            label: Détails
+            type: string
+            list: true
+      - {label: "Titre du Résultat", name: "result_title", type: "string"}
+      - {label: "Contenu du Résultat", type: "string", name: "result_content", widget: "textarea", hint: "Supporte le Markdown pour la mise en forme (ex: **texte**)"}
   - name: mentions
     label: Mentions légales
     path: src/mentions-legales.njk

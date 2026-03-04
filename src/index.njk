@@ -96,44 +96,37 @@ description: "{{ site.name }} - {{ site.description }}"
 <!-- Section Méthode -->
 <section id="methode" class="methode">
     <div class="container">
-        <p class="section-label">Approche</p>
-        <h2>Une méthode personnalisée qui s'adapte à vous</h2>
-        <p class="section-intro">L'hypnose Ericksonienne enrichie de PNL et d'autres outils pour une transformation profonde et durable.</p>
+        <p class="section-label">{{ methode.section_label }}</p>
+        <h2>{{ methode.title }}</h2>
+        <p class="section-intro">{{ methode.intro }}</p>
 
-        <div class="methode-grid">
+                <div class="methode-grid">
+            {% for item in methode.items %}
             <div class="methode-item">
-                <h3>Hypnose Ericksonienne</h3>
-                <p>Approche douce et respectueuse qui active vos ressources inconscientes. Loin du spectacle, cette pratique humaniste favorise un état de conscience modifié propice au changement souhaité.</p>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
                 <ul>
-                    <li>Communication indirecte et permissive</li>
-                    <li>Respect de votre rythme unique</li>
-                    <li>Activation de vos propres solutions</li>
+                    {% for detail in item.details %}
+                    <li>{{ detail }}</li>
+                    {% endfor %}
                 </ul>
             </div>
-
+            {% if not loop.last %}
             <div class="methode-divider" aria-hidden="true">
                 <span>&</span>
             </div>
-
-            <div class="methode-item">
-                <h3>PNL & Outils complémentaires</h3>
-                <p>Techniques concrètes pour reprogrammer les schémas limitants et ancrer les changements souhaités dans votre quotidien.</p>
-                <ul>
-                    <li>Outils de changement rapide</li>
-                    <li>EFT & EMDR (stimulations bilatérales) selon besoins</li>
-                    <li>Techniques utilisables entre les séances</li>
-                </ul>
-            </div>
+            {% endif %}
+            {% endfor %}
         </div>
 
-        <div class="methode-result">
-            <h3>Le résultat</h3>
-            <p>Une transformation <strong>profonde ET rapide</strong>, généralement en <strong>3 à 6 séances</strong>, avec des outils concrets pour ancrer le changement dans votre vie quotidienne.</p>
+                <div class="methode-result">
+            <h3>{{ methode.result_title }}</h3>
+            <p>{{ methode.result_content | safe }}</p>
         </div>
     </div>
 </section>
 
-<!-- Section Tarifs (DYNAMIQUE depuis tarifs.json) -->
+<!-- Section Tarifs -->
 <section id="tarifs" class="tarifs">
     <div class="container">
         <p class="section-label">Tarifs & Modalités</p>
