@@ -1,0 +1,118 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: osersoi/osersoi.github.io
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: src/images/blog
+public_folder: /images/blog
+
+collections:
+  - name: posts
+    label: Articles de blog
+    folder: src/posts
+    create: true
+    slug: "{{slug}}"  # utilise le champ slug comme nom de fichier
+    fields:
+      - { name: title,       label: Titre,               widget: string,   required: true }
+      - { name: slug,        label: "URL (slug)",         widget: string,   required: true }
+      - { name: date,        label: Date de publication,  widget: datetime, required: true }
+      - { name: description, label: Description courte,   widget: string,   required: false }
+      - { name: image,       label: Image principale,     widget: image,    required: false }
+      - { name: body,        label: Contenu de l'article, widget: markdown }
+
+  - name: data
+    label: Données du site
+    files:
+
+      - name: site
+        label: Paramètres du site
+        file: src/_data/site-content.json
+        fields:
+          - { name: name,        label: Nom du site,    widget: string }
+          - { name: tagline,     label: Slogan,          widget: string }
+          - { name: subtitle,    label: Sous-titre,      widget: string }
+          - { name: description, label: Description SEO, widget: string }
+
+      - name: tarifs
+        label: Tarifs
+        file: src/_data/tarifs.json
+        fields:
+          - { name: promo_end, label: Fin de la promo, widget: string }
+          - name: items
+            label: Tarifs
+            widget: list  # "type: object, list: true" → widget: list + fields
+            fields:
+              - { name: badge,      label: Badge,         widget: string }
+              - { name: title,      label: Titre,         widget: string }
+              - { name: price,      label: Prix,          widget: string }
+              - { name: price_old,  label: Ancien prix,   widget: string }
+              - { name: promo,      label: Promo,         widget: string }
+              - { name: duration,   label: Durée,         widget: string }
+              - { name: featured,   label: Mis en avant,  widget: boolean }
+              - name: details
+                label: Détails
+                widget: list  # liste de chaînes simples
+
+      - name: accompagnement
+        label: Accompagnement
+        file: src/_data/accompagnement.json
+        fields:
+          - name: genres
+            label: Catégories d'Accompagnement
+            widget: list
+            fields:
+              - { name: id,            label: ID,                    widget: string, required: true, hint: "Identifiant unique (ex: adultes, enfants)" }
+              - { name: section_label, label: Label de Section,      widget: string }
+              - { name: section_title, label: Titre de Section,      widget: string }
+              - { name: section_intro, label: Introduction de Section, widget: text }  # "widget: textarea" → widget: text dans Decap/Sveltia
+              - name: cards
+                label: Cartes
+                widget: list
+                fields:
+                  - { name: icon,        label: Icône,               widget: string, hint: "Emoji ou chemin vers une image" }
+                  - { name: title,       label: Titre de la Carte,   widget: string }
+                  - { name: description, label: Description de la Carte, widget: text }
+
+      - name: a_propos
+        label: À Propos
+        file: src/_data/a_propos.json
+        fields:
+          - { name: section_label, label: Label de Section, widget: string }
+          - { name: title_suffix,  label: Suffixe de Titre, widget: string, hint: "Ex: '. Un parcours riche...'" }
+          - { name: intro,         label: Introduction,     widget: text }
+          - name: content_paragraphs
+            label: Paragraphes de Contenu
+            widget: list
+            hint: "Supporte le Markdown pour la mise en forme (ex: **texte**)"
+            field:  # "type: string, list: true, widget: textarea" → list avec un champ text
+              name: paragraph
+              label: Paragraphe
+              widget: text
+          - { name: certifications_title, label: Titre des Certifications, widget: string }
+          - name: certifications
+            label: Certifications
+            widget: list  # liste de chaînes simples
+
+      - name: methode
+        label: Méthode
+        file: src/_data/methode.json
+        fields:
+          - { name: section_label, label: Label de Section, widget: string }
+          - { name: title,         label: Titre,            widget: string }
+          - { name: intro,         label: Introduction,     widget: text }
+          - name: items
+            label: Éléments de Méthode
+            widget: list
+            fields:
+              - { name: title,       label: "Titre de l'Élément", widget: string }
+              - { name: description, label: Description,           widget: text }
+              - name: details
+                label: Détails
+                widget: list
+          - { name: result_title,   label: Titre du Résultat,   widget: string }
+          - { name: result_content, label: Contenu du Résultat, widget: text, hint: "Supporte le Markdown pour la mise en forme (ex: **texte**)" }
+
