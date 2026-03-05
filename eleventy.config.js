@@ -31,6 +31,7 @@ export default function(eleventyConfig) {
 
     eleventyConfig.addPassthroughCopy("src/images");
     eleventyConfig.addPassthroughCopy("src/CNAME");
+    eleventyConfig.addPassthroughCopy("src/admin");
 
     // Collection d'articles de blog, triés par date décroissante
     eleventyConfig.addCollection("blog", function(collectionApi) {
@@ -42,6 +43,7 @@ export default function(eleventyConfig) {
     eleventyConfig.addCollection("sitemapPages", function(collectionApi) {
         return collectionApi.getAll().filter((page) => {
             // Only include pages with a URL ending in / or .html
+            if (page.url.startsWith("/admin")) return false;
             return page.url && (page.url.endsWith("/") || page.url.endsWith(".html"));
         });
     });
