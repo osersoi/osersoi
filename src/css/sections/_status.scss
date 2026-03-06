@@ -34,3 +34,14 @@
   margin-bottom: 1.5rem;
 }
 
+.not-found-icon {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-width: 150px;
+    height: auto;
+  }
+}
+
