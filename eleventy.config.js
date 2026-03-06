@@ -40,10 +40,11 @@ export default function(eleventyConfig) {
         });
     });
 
+    const EXCLUDED_PATHS = ["/admin", "/404"];
     eleventyConfig.addCollection("sitemapPages", function(collectionApi) {
         return collectionApi.getAll().filter((page) => {
             // Only include pages with a URL ending in / or .html
-            if (page.url.startsWith("/admin")) return false;
+            if (EXCLUDED_PATHS.some(path => page.url.startsWith(path))) return false;
             return page.url && (page.url.endsWith("/") || page.url.endsWith(".html"));
         });
     });
